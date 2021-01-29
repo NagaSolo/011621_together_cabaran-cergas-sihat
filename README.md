@@ -1,3 +1,10 @@
-### 011621_together_cabaran-cergas-sihat
+### Keluargaku Abe Din
 
-Dashboard untuk Cabaran Cergas Sihat 2021
+- repository at: github.com/nagasolo/011621_together_cabaran-cergas-sihat
+
+
+### PoC
+- Dashboard untuk Cabaran Cergas Sihat 2021
+
+### Main
+- Django - `ONGOING`

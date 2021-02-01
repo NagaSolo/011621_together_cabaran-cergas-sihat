@@ -8,3 +8,8 @@
 
 ### Main
 - Django - `ONGOING`
+
+### Django App
+- landing page
+- cergas sihat
+- user management

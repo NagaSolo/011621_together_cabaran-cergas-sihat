@@ -7,7 +7,10 @@
 - Dashboard untuk Cabaran Cergas Sihat 2021
 
 ### Main
-- Django - `ONGOING`
+- Django 
+    Users - `ONGOING`
+    - update stat
+    - chat
 
 ### Django App
 - landing page

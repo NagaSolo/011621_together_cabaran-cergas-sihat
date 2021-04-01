@@ -11,6 +11,7 @@
     Users - `ONGOING`
     - update stat
     - chat
+    - CRUD application
 
 ### Django App
 - landing page

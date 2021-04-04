@@ -12,6 +12,7 @@
     - update stat
     - chat
     - CRUD application
+        - Feature to create, update, read, delete posts
 
 ### Django App
 - landing page

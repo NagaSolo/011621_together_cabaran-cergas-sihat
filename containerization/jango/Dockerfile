@@ -2,18 +2,18 @@
 FROM python:3.7
 
 # Set working directory
-WORKDIR /usr/src/app
+WORKDIR /code
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Allows docker to cache installed dependencies between builds
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt /code/
+RUN pip install -r requirements.txt
 
 # Mounts the application code to the image
-COPY . /usr/src/app
+COPY . /code/
 
 # EXPOSE 8000
 

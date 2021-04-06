@@ -1,11 +1,5 @@
-from django.shortcuts import render
-
-from .models import Post
-def rumah(request):
-    context = {
-        'posts': Post.objects.all()
-    }
-    return render(request, 'landing/home.html', context)from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import render    
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
     DetailView,
@@ -14,6 +8,12 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Post
+
+def rumah(request):
+    context = {
+        'posts': Post.objects.all()
+    }
+    return render(request, 'landing/home.html', context)
 
 
 def home(request):

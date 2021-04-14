@@ -12,9 +12,9 @@ services:
       - postgres_data:/var/lib/postgresql/data/
   together-migration:
     build: ./jango
-    command: python ./chirpies/manage.py migrate --noinput
+    command: bash -c "python ./jango/manage.py makemigrations && python ./jango/manage.py migrate --noinput"
     volumes:
-      - .:/usr/src/app
+      - .:/code
     depends_on:
       - together-db
   together-web:

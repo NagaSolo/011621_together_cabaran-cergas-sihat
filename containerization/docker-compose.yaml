@@ -9,10 +9,10 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - ./data/db:/var/lib/postgresql/data/
   together-migration:
     build: ./jango
-    command: bash -c "python ./jango/manage.py makemigrations && python ./jango/manage.py migrate --noinput"
+    command: python ./jango/manage.py migrate --noinput
     volumes:
       - .:/code
     depends_on:

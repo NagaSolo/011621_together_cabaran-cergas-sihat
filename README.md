@@ -18,3 +18,6 @@
 - landing page
 - cergas sihat
 - user management
+
+### Tech Stack
+- Container - docker, docker-compose

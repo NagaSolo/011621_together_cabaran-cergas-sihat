@@ -20,8 +20,11 @@
 - user management
 
 ### Tech Stack
-- Microservices 
-    - docker
-    - docker-compose
-    - gRPC
-    - kubernetes
+- Microservices:
+    Container:
+        - docker
+    Orchestration:
+        - docker-compose
+        - kubernetes
+    Communication:
+        - gRPC

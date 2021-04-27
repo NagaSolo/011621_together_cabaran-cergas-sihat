@@ -28,3 +28,7 @@
         - kubernetes
     Communication:
         - gRPC
+        - REST API
+    API Gateway:
+        - KONG
+        - Ambassador

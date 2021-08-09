@@ -1,8 +1,8 @@
 version: '3'
 
 volumes:
-  local_postgres_data: {}
-  local_postgres_data_backups: {}
+  local_keluargaku_postgres_data: {}
+  local_keluargaku_postgres_data_backups: {}
 
 services:
   django: &django
@@ -30,8 +30,8 @@ services:
     image: keluargaku_production_postgres
     container_name: postgres
     volumes:
-      - local_postgres_data:/var/lib/postgresql/data:Z
-      - local_postgres_data_backups:/backups:z
+      - local_keluargaku_postgres_data:/var/lib/postgresql/data:Z
+      - local_keluargaku_postgres_data_backups:/backups:z
     env_file:
       - ./.envs/.local/.postgres
 

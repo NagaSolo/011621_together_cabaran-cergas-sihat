@@ -15,7 +15,8 @@ def output_graph(name):
     plt.savefig('output/' + name + '.png')
     return f'Graph for {name} done'
 
-print(df_progress.columns)
+if __name__ == '__main__':
+    # print(df_progress.columns)
 
-for person in df_progress.columns[1:]:
-    output_graph(person)
+    for person in df_progress.columns[1:]:
+        output_graph(person)

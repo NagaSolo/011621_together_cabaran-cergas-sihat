@@ -1,11 +1,33 @@
 import pandas as pd
 
 import matplotlib.pyplot as plt
+from pandas.core.frame import DataFrame
+
+class DataSet:
+    """ Choose dataset 
+
+        0 : choose dataset with NaN values
+        1 : choose dataset without NaN values
+    
+    """
+    def __init__(self) -> DataFrame:
+        self.df_with_nan = pd.read_csv('datasets/progress_phase1.csv', sep=',', thousands=' ')
+        self.df_no_nan = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
+
+    def option(self, choice : int):
+        if choice == 0:
+            return self.df_with_nan
+        elif choice == 1:
+            return self.df_no_nan
+        else:
+            return f'{choice} is not a viable option, select 0 or 1'
 
 class IndividualProgressChart:
+    """ Plot individual data """
     def __init__(self, name : str):
         self.name = name
-        self.df = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
+        self.df = DataSet().option(0)
+        # self.df = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
 
     # df_progress[['Minggu', 'Abe Kamil', 'Abe Isey', 'Kak Dayah', 'Kak Teh', 'Adz', 'Auni', 'Anis']].apply(pd.to_numeric, errors='coerce')
 
@@ -22,8 +44,10 @@ class IndividualProgressChart:
             return f'No {self.name}'
 
 class AllProgressChart:
+    """ Plot all data together """
     def __init__(self):
-        self.df = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
+        self.df = DataSet().option(1)
+        # self.df = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
 
     """ Graf bagi setiap peserta """
     def output_together_graph(self):

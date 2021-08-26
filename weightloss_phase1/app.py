@@ -14,7 +14,7 @@ class DataSet:
         self.df_with_nan = pd.read_csv('datasets/progress_phase1.csv', sep=',', thousands=' ')
         self.df_no_nan = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
 
-    def option(self, choice : int):
+    def option(self, choice):
         if choice == 0:
             return self.df_with_nan
         elif choice == 1:
@@ -22,14 +22,33 @@ class DataSet:
         else:
             return f'{choice} is not a viable option, select 0 or 1'
 
+
+class DatasetClassmethod:
+    """ Choose dataset 
+
+        implementation using classmethod
+
+        0 : choose dataset with NaN values
+        1 : choose dataset without NaN values
+    
+    """
+    df_with_nan = pd.read_csv('datasets/progress_phase1.csv', sep=',', thousands=' ')
+    df_no_nan = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
+
+    def option(cls, choice : int):
+        if choice == 0:
+            return cls.df_with_nan
+        elif choice == 1:
+            return cls.df_no_nan
+        else:
+            return f'Option {choice} is not viable'
+
+
 class IndividualProgressChart:
     """ Plot individual data """
-    def __init__(self, name : str):
+    def __init__(self, name : str, df : DataSet):
         self.name = name
-        self.df = DataSet().option(0)
-        # self.df = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
-
-    # df_progress[['Minggu', 'Abe Kamil', 'Abe Isey', 'Kak Dayah', 'Kak Teh', 'Adz', 'Auni', 'Anis']].apply(pd.to_numeric, errors='coerce')
+        self.df = df
 
     """ Graf bagi setiap peserta """
     def output_graph(self):
@@ -45,9 +64,8 @@ class IndividualProgressChart:
 
 class AllProgressChart:
     """ Plot all data together """
-    def __init__(self):
-        self.df = DataSet().option(1)
-        # self.df = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
+    def __init__(self, df : DataSet):
+        self.df = df
 
     """ Graf bagi setiap peserta """
     def output_together_graph(self):
@@ -70,7 +88,14 @@ class AllProgressChart:
 if __name__ == '__main__':
     # print(df_progress.columns)
 
-    for person in ['Abe Kamil', 'Abe Isey', 'Kak Dayah', 'Kak Teh', 'Adz', 'Auni', 'Anis']:
-        print(IndividualProgressChart(person).output_graph())
+    w_NaN_dataset = DataSet().option(0)
+    wout_NaN_dataset = DataSet().option(1)
 
-    print(AllProgressChart().output_together_graph())
+    # class method datasource
+    NaN_data = DatasetClassmethod().option(0)
+    wo_NaN_data = DatasetClassmethod().option(1)
+
+    for person in ['Abe Kamil', 'Abe Isey', 'Kak Dayah', 'Kak Teh', 'Adz', 'Auni', 'Anis']:
+        print(IndividualProgressChart(person, wo_NaN_data).output_graph())
+
+    print(AllProgressChart(NaN_data).output_together_graph())

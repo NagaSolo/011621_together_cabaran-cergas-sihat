@@ -35,6 +35,7 @@ class DatasetClassmethod:
     df_with_nan = pd.read_csv('datasets/progress_phase1.csv', sep=',', thousands=' ')
     df_no_nan = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
 
+    @classmethod
     def option(cls, choice : int):
         if choice == 0:
             return cls.df_with_nan

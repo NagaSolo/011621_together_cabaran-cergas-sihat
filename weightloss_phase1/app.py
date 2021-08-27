@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from pandas.core.frame import DataFrame
 
+import tkinter
+
 class DataSet:
     """ Choose dataset 
 
@@ -85,6 +87,52 @@ class AllProgressChart:
         plt.savefig('output/semua.png')
         
         return f'Graph for semua done'
+
+
+class ViewTkinter(tk.Frame):
+    def __init__(self, master):
+        self.master = master
+        master.title("Global statistics of stunted growth in kids population (2000 - 2020)")
+
+        self.label = tk.Label(master, text="Country and kids stunted growth")
+        # self.label.grid(column = 3, padx = 10, pady = 25)
+        self.label.pack(fill='x', padx=5, pady=5)
+
+        self.greet_button = tk.Button(master, text="Greet", command=self.greet)
+        # self.greet_button.grid(column = 3, padx = 10, pady = 25)
+        self.greet_button.pack(padx=5, pady=5)
+
+        self.country_select_label = ttk.Label(
+            master, 
+            text = "Select the Country :",
+            font = ("Times New Roman", 10))
+        # self.country_select_label.grid(column = 3, row = 5, padx = 10, pady = 25)
+        self.country_select_label.pack(padx=5, pady=5)
+
+        # Combobox creation
+        n = tk.StringVar()
+        self.country_choosen = ttk.Combobox(master, width = 27, textvariable = n)
+  
+        # Adding combobox drop down list
+        self.country_choosen['values'] = tuple(i[1] for i in pytz.country_names.items())
+        
+        # self.country_choosen.grid(column = 1, row = 5)
+        self.country_choosen.pack(padx=5, pady=5)
+        self.country_choosen.current()
+        self.country_choosen.bind('<<ComboboxSelected>>', self.country_data)
+
+        self.close_button = tk.Button(master, text="Close", bg='red', fg='white', command=master.quit)
+        # self.close_button.grid(column = 3, padx = 10, pady = 25)
+        self.close_button.pack(padx=5, pady=5, side=BOTTOM)
+
+    def country_data(self, event):
+        chosen_country = self.country_choosen['values'][self.country_choosen.current()]
+        data = StuntedGrowthData(chosen_country).output_data()
+        messagebox.showinfo(title='Kids growth of selected country', message=data)
+
+    def greet(self):
+        print("Greetings!")
+
 
 if __name__ == '__main__':
     # print(df_progress.columns)

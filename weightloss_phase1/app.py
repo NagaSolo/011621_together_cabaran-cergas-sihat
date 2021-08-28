@@ -3,7 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from pandas.core.frame import DataFrame
 
-import tkinter
+import tkinter as tk
+from tkinter import ttk, messagebox
+from tkinter.constants import BOTTOM
 
 class DataSet:
     """ Choose dataset 
@@ -45,6 +47,26 @@ class DatasetClassmethod:
             return cls.df_no_nan
         else:
             return f'Option {choice} is not viable'
+
+    @classmethod
+    def all_name(cls, choice : int):
+        if choice == 0:
+            return cls.df_with_nan.columns
+        elif choice == 1:
+            return cls.df_no_nan.columns
+        else:
+            return f'Option {choice} is not viable'
+
+
+class AllNameController:
+    """ Aggregate name into list 
+    
+        return name for selection
+    
+    """
+    @classmethod
+    def all_name(cls, option):
+        return DatasetClassmethod().all_name(option).columns
 
 
 class IndividualProgressChart:
@@ -92,9 +114,9 @@ class AllProgressChart:
 class ViewTkinter(tk.Frame):
     def __init__(self, master):
         self.master = master
-        master.title("Global statistics of stunted growth in kids population (2000 - 2020)")
+        master.title("Together - Weightloss Program")
 
-        self.label = tk.Label(master, text="Country and kids stunted growth")
+        self.label = tk.Label(master, text="Cipta graf")
         # self.label.grid(column = 3, padx = 10, pady = 25)
         self.label.pack(fill='x', padx=5, pady=5)
 
@@ -102,33 +124,33 @@ class ViewTkinter(tk.Frame):
         # self.greet_button.grid(column = 3, padx = 10, pady = 25)
         self.greet_button.pack(padx=5, pady=5)
 
-        self.country_select_label = ttk.Label(
+        self.participant_select_label = ttk.Label(
             master, 
-            text = "Select the Country :",
+            text = "Pilih peserta :",
             font = ("Times New Roman", 10))
-        # self.country_select_label.grid(column = 3, row = 5, padx = 10, pady = 25)
-        self.country_select_label.pack(padx=5, pady=5)
+        self.participant_select_label.pack(padx=5, pady=5)
 
         # Combobox creation
         n = tk.StringVar()
-        self.country_choosen = ttk.Combobox(master, width = 27, textvariable = n)
+        self.participant_choosen = ttk.Combobox(master, width = 27, textvariable = n)
   
         # Adding combobox drop down list
-        self.country_choosen['values'] = tuple(i[1] for i in pytz.country_names.items())
+        self.participant_choosen['values'] = AllNameController().all_name(0)
         
         # self.country_choosen.grid(column = 1, row = 5)
-        self.country_choosen.pack(padx=5, pady=5)
-        self.country_choosen.current()
-        self.country_choosen.bind('<<ComboboxSelected>>', self.country_data)
+        self.participant_choosen.pack(padx=5, pady=5)
+        self.participant_choosen.current()
+        self.participant_choosen.bind('<<ComboboxSelected>>', self.participant_data)
 
         self.close_button = tk.Button(master, text="Close", bg='red', fg='white', command=master.quit)
         # self.close_button.grid(column = 3, padx = 10, pady = 25)
         self.close_button.pack(padx=5, pady=5, side=BOTTOM)
 
-    def country_data(self, event):
-        chosen_country = self.country_choosen['values'][self.country_choosen.current()]
-        data = StuntedGrowthData(chosen_country).output_data()
-        messagebox.showinfo(title='Kids growth of selected country', message=data)
+    def participant_data(self, event):
+        pass
+        # chosen_country = self.country_choosen['values'][self.country_choosen.current()]
+        # data = StuntedGrowthData(chosen_country).output_data()
+        # messagebox.showinfo(title='Kids growth of selected country', message=data)
 
     def greet(self):
         print("Greetings!")
@@ -140,11 +162,16 @@ if __name__ == '__main__':
     w_NaN_dataset = DataSet().option(0)
     wout_NaN_dataset = DataSet().option(1)
 
-    # class method datasource
-    NaN_data = DatasetClassmethod().option(0)
-    wo_NaN_data = DatasetClassmethod().option(1)
+    """class method datasource, plot all individual graph """ 
+    # NaN_data = DatasetClassmethod().option(0)
+    # wo_NaN_data = DatasetClassmethod().option(1)
 
-    for person in ['Abe Kamil', 'Abe Isey', 'Kak Dayah', 'Kak Teh', 'Adz', 'Auni', 'Anis']:
-        print(IndividualProgressChart(person, wo_NaN_data).output_graph())
+    # for person in ['Abe Kamil', 'Abe Isey', 'Kak Dayah', 'Kak Teh', 'Adz', 'Auni', 'Anis']:
+    #     print(IndividualProgressChart(person, wo_NaN_data).output_graph())
 
-    print(AllProgressChart(NaN_data).output_together_graph())
+    # print(AllProgressChart(NaN_data).output_together_graph())
+
+
+    """ View using tkinter """
+    root = tk.Tk()
+    ViewTkinter(root)

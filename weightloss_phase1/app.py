@@ -40,35 +40,56 @@ class DatasetClassmethod:
     
     df_with_nan = pd.read_csv('datasets/progress_phase1.csv', sep=',', thousands=' ')
     df_no_nan = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
+    df_chosen = None
 
     @classmethod
     def option(cls, choice : int):
         if choice == 0:
-            return cls.df_with_nan
+            df_chosen = cls.df_with_nan
+            return df_chosen
         elif choice == 1:
-            return cls.df_no_nan
+            df_chosen = cls.df_no_nan
+            return df_chosen
         else:
             return f'Option {choice} is not viable'
 
     @classmethod
-    def all_name(cls, choice : int):
-        if choice == 0:
-            return cls.df_with_nan.columns.values.tolist()
-        elif choice == 1:
-            return cls.df_no_nan.columns.tolist()
+    def all_name(cls):
+        if cls.df_chosen is None:
+            return f'Non df is chosen is not viable'
         else:
-            return f'Option {choice} is not viable'
+            return cls.df_chosen.values.tolist()
 
 
-class AllNameController:
+class DataSetController:
     """ Aggregate name into list 
     
         return name for selection
     
     """
+    
+
     @classmethod
-    def all_name(cls, option):
-        return DatasetClassmethod().all_name(option)[1:]
+    def all_data(cls, choice):
+        return DatasetClassmethod().option(choice)
+
+    @classmethod
+    def all_name(cls, choice):
+        df = DatasetClassmethod().option(choice)
+        return df.all_name()[1:]
+    
+    @classmethod
+    def plot_individual(cls, name):
+        if name in cls.all_data():
+            col_individu = self.df[self.name]
+            col_minggu = self.df['Minggu']
+            new_df = pd.DataFrame(list(zip(col_minggu, col_individu)), columns=['Minggu', self.name])
+            new_df.plot(x ='Minggu', y=self.name, kind = 'line')
+            plt.savefig('output/' + self.name + '.png')
+            return f'Graph for {self.name} done'
+        else:
+            return f'No {self.name}'
+
 
 
 class IndividualProgressChart:
@@ -137,7 +158,7 @@ class ViewTkinter(tk.Frame):
         self.participant_choosen = ttk.Combobox(master, width = 27, textvariable = n)
   
         # Adding combobox drop down list
-        self.participant_choosen['values'] = AllNameController().all_name(0)
+        self.participant_choosen['values'] = DataSetController().all_name(0)
         
         # self.country_choosen.grid(column = 1, row = 5)
         self.participant_choosen.pack(padx=5, pady=5)
@@ -150,9 +171,13 @@ class ViewTkinter(tk.Frame):
 
     def participant_data(self, event):
         pass
-        # chosen_country = self.country_choosen['values'][self.country_choosen.current()]
-        # data = StuntedGrowthData(chosen_country).output_data()
-        # messagebox.showinfo(title='Kids growth of selected country', message=data)
+        # figure2 = plt.Figure(figsize=(5,4), dpi=100)
+        # ax2 = figure2.add_subplot(111)
+        # line2 = FigureCanvasTkAgg(figure2, root)
+        # line2.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH)
+        # df2 = df2[['Year','Unemployment_Rate']].groupby('Year').sum()
+        # df2.plot(kind='line', legend=True, ax=ax2, color='r',marker='o', fontsize=10)
+        # ax2.set_title('Year Vs. Unemployment Rate')
 
     def greet(self):
         print("Greetings!")
@@ -165,8 +190,8 @@ if __name__ == '__main__':
     wout_NaN_dataset = DataSet().option(1)
 
     """class method datasource, plot all individual graph """ 
-    # NaN_data = DatasetClassmethod().option(0)
-    # wo_NaN_data = DatasetClassmethod().option(1)
+    # NaN_data = DataSetController().option(0)
+    # wo_NaN_data = DataSetController().option(1)
 
     # for person in ['Abe Kamil', 'Abe Isey', 'Kak Dayah', 'Kak Teh', 'Adz', 'Auni', 'Anis']:
     #     print(IndividualProgressChart(person, wo_NaN_data).output_graph())

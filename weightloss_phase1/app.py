@@ -1,7 +1,8 @@
 import pandas as pd
+from pandas.core.frame import DataFrame
 
 import matplotlib.pyplot as plt
-from pandas.core.frame import DataFrame
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 import tkinter as tk
 from tkinter import ttk, messagebox
@@ -36,6 +37,7 @@ class DatasetClassmethod:
         1 : choose dataset without NaN values
     
     """
+    
     df_with_nan = pd.read_csv('datasets/progress_phase1.csv', sep=',', thousands=' ')
     df_no_nan = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
 
@@ -51,9 +53,9 @@ class DatasetClassmethod:
     @classmethod
     def all_name(cls, choice : int):
         if choice == 0:
-            return cls.df_with_nan.columns
+            return cls.df_with_nan.columns.values.tolist()
         elif choice == 1:
-            return cls.df_no_nan.columns
+            return cls.df_no_nan.columns.tolist()
         else:
             return f'Option {choice} is not viable'
 
@@ -66,7 +68,7 @@ class AllNameController:
     """
     @classmethod
     def all_name(cls, option):
-        return DatasetClassmethod().all_name(option).columns
+        return DatasetClassmethod().all_name(option)[1:]
 
 
 class IndividualProgressChart:
@@ -175,3 +177,9 @@ if __name__ == '__main__':
     """ View using tkinter """
     root = tk.Tk()
     ViewTkinter(root)
+
+    # set frame geometry
+    root.geometry('500x250')
+
+    # show window
+    root.mainloop()

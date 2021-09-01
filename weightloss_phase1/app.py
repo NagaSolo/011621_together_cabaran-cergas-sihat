@@ -1,3 +1,5 @@
+from os import error
+
 import pandas as pd
 from pandas.core.frame import DataFrame
 
@@ -25,21 +27,24 @@ class DatasetClassmethod:
 
     @classmethod
     def option(cls, choice : int):
-        if choice == 0:
-            df_chosen = cls.df_with_nan
-            return df_chosen
-        elif choice == 1:
-            df_chosen = cls.df_no_nan
-            return df_chosen
-        else:
-            return f'Option {choice} is not viable'
+        try:
+            if choice == 0:
+                cls.df_chosen = cls.df_with_nan
+                return cls.df_chosen
+            elif choice == 1:
+                cls.df_chosen = cls.df_no_nan
+                return cls.df_chosen
+        except error as e:
+            return f'Option {choice} is not viable: {e}'
 
     @classmethod
-    def all_name(cls):
-        if cls.df_chosen is None:
-            return f'Non df is chosen'
+    def all_name(cls, choice : int):
+        if choice == 0:
+            return cls.df_with_nan.columns.values.tolist()
+        elif choice == 1:
+            return cls.df_no_nan.columns.values.tolist()
         else:
-            return cls.df_chosen.values.tolist()
+            return f'Non df is chosen'
 
 
 class DataSetController:
@@ -49,6 +54,7 @@ class DataSetController:
     
     """
     df = DatasetClassmethod().option(1)
+    df_all_name = DatasetClassmethod().all_name(1)
 
     @classmethod
     def all_data(cls):
@@ -56,20 +62,22 @@ class DataSetController:
 
     @classmethod
     def all_name(cls):
-        return cls.df.all_name()[1:]
+        return cls.df_all_name[1:]
     
     @classmethod
     def plot_individual(cls, name):
-        if name in cls.all_data():
-            col_individu = cls.df[cls.name]
+        if name in cls.all_name():
+            figure2 = plt.Figure(figsize=(5,4), dpi=100)
+            ax2 = figure2.add_subplot(111)
+            line2 = FigureCanvasTkAgg(figure2, root)
+            line2.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH)
+            col_individu = cls.df[name]
             col_minggu = cls.df['Minggu']
-            new_df = pd.DataFrame(list(zip(col_minggu, col_individu)), columns=['Minggu', cls.name])
-            new_df.plot(x ='Minggu', y=cls.name, kind = 'line')
-            plt.savefig('output/' + cls.name + '.png')
-            return f'Graph for {cls.name} done'
+            new_df = pd.DataFrame(list(zip(col_minggu, col_individu)), columns=['Minggu', name])
+            new_df.plot(x ='Minggu', y=name, kind = 'line', legend=True, ax=ax2, color='r',marker='o', fontsize=10)
+            ax2.set_title(f'{name} Progress')
         else:
-            return f'No {cls.name}'
-
+            return f'No {name}'
 
 
 class ViewTkinter(tk.Frame):
@@ -96,8 +104,7 @@ class ViewTkinter(tk.Frame):
         self.participant_choosen = ttk.Combobox(master, width = 27, textvariable = n)
   
         # Adding combobox drop down list
-        all_name = DataSetController()
-        self.participant_choosen['values'] = all_name.all_name()
+        self.participant_choosen['values'] = DataSetController.all_name()
         
         # self.country_choosen.grid(column = 1, row = 5)
         self.participant_choosen.pack(padx=5, pady=5)
@@ -109,14 +116,8 @@ class ViewTkinter(tk.Frame):
         self.close_button.pack(padx=5, pady=5, side=BOTTOM)
 
     def participant_data(self, event):
-        DataSetController().plot_individual(self.participant_choosen.current())
-        # figure2 = plt.Figure(figsize=(5,4), dpi=100)
-        # ax2 = figure2.add_subplot(111)
-        # line2 = FigureCanvasTkAgg(figure2, root)
-        # line2.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH)
-        # df2 = df2[['Year','Unemployment_Rate']].groupby('Year').sum()
-        # df2.plot(kind='line', legend=True, ax=ax2, color='r',marker='o', fontsize=10)
-        # ax2.set_title('Year Vs. Unemployment Rate')
+        chosen_participant = self.participant_choosen['values'][self.participant_choosen.current()]
+        DataSetController().plot_individual(chosen_participant)
 
     def greet(self):
         print("Greetings!")

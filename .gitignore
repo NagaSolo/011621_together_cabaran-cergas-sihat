@@ -2,3 +2,5 @@ env
 __pycache__
 datasets
 output
+.superuser
+env_windows

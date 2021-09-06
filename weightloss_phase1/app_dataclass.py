@@ -3,11 +3,22 @@ from typing import List
 
 import pandas as pd
 
+import matplotlib.pyplot as plt
+
 @dataclass
 class Peserta:
     
     name : str
     progress : List
+
+    def plot(self):
+        plt.plot(self.progress, color='magenta', marker='o',mfc='pink' ) #plot the data
+        plt.xticks(range(0,len(self.progress)+1, 1)) #set the tick frequency on x-axis
+
+        plt.ylabel('KG') #set the label for y axis
+        plt.xlabel('Minggu') #set the label for x-axis
+        plt.title(f"Perkembangan Berat {self.name}") #set the title of the graph
+        plt.show() #display the graph
 
 if __name__ == '__main__':
     peserta_peserta = []
@@ -18,5 +29,8 @@ if __name__ == '__main__':
     for n in df.columns[1:]:
         peserta_dan_progress = df[n]
         peserta_peserta.append(Peserta(n, peserta_dan_progress.values.tolist()))
-
+        
     print(peserta_peserta)
+
+    for p in peserta_peserta:
+        p.plot()

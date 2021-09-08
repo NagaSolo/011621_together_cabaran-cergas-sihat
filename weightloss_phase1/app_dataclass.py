@@ -32,5 +32,7 @@ if __name__ == '__main__':
         
     print(peserta_peserta)
 
-    for p in peserta_peserta:
-        p.plot()
+    fig, axs = plt.subplots(len(peserta_peserta))
+    fig.suptitle('Perkembangan berat peserta-peserta')
+    for p in range(len(peserta_peserta)):
+        axs[p] = peserta_peserta[p].plot()

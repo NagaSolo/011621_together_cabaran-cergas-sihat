@@ -12,7 +12,7 @@ class Peserta:
     progress : List
 
     def plot(self):
-        plt.plot(self.progress, color='magenta', marker='o',mfc='pink' ) #plot the data
+        plt.plot(self.progress, color='magenta', marker='o',mfc='pink') #plot the data
         plt.xticks(range(0,len(self.progress)+1, 1)) #set the tick frequency on x-axis
 
         plt.ylabel('KG') #set the label for y axis
@@ -32,7 +32,40 @@ if __name__ == '__main__':
         
     print(peserta_peserta)
 
-    fig, axs = plt.subplots(len(peserta_peserta))
+    fig, (ax1, ax2, ax3, ax4, ax5, ax6, ax7) = plt.subplots(len(peserta_peserta))
     fig.suptitle('Perkembangan berat peserta-peserta')
-    for p in range(len(peserta_peserta)):
-        axs[p] = peserta_peserta[p].plot()
+    ax1.plot(
+        peserta_peserta[0].progress, 
+        color='magenta', marker='o',mfc='pink', 
+        # xticks=range(0,len(peserta_peserta[0].progress)+1, 1),
+        xlabel='Minggu', ylabel=f'{peserta_peserta[0].name}')
+    ax2.plot(
+        peserta_peserta[1].progress, 
+        color='magenta', marker='o',mfc='pink', 
+        # xticks=range(0,len(peserta_peserta[1].progress)+1, 1),
+        xlabel='Minggu', ylabel=f'{peserta_peserta[1].name}')
+    ax3.plot(
+        peserta_peserta[2].progress, 
+        color='magenta', marker='o',mfc='pink', 
+        # xticks=range(0,len(peserta_peserta[2].progress)+1, 1),
+        xlabel='Minggu', ylabel=f'{peserta_peserta[2].name}')
+    ax4.plot(
+        peserta_peserta[3].progress, 
+        color='magenta', marker='o',mfc='pink', 
+        # xticks=range(0,len(peserta_peserta[3].progress)+1, 1),
+        xlabel='Minggu', ylabel=f'{peserta_peserta[3].name}')
+    ax5.plot(
+        peserta_peserta[4].progress, 
+        color='magenta', marker='o',mfc='pink', 
+        # xticks=range(0,len(peserta_peserta[4].progress)+1, 1),
+        xlabel='Minggu', ylabel=f'{peserta_peserta[4].name}')
+    ax6.plot(
+        peserta_peserta[5].progress, 
+        color='magenta', marker='o',mfc='pink', 
+        # xticks=range(0,len(peserta_peserta[5].progress)+1, 1),
+        xlabel='Minggu', ylabel=f'{peserta_peserta[5].name}')
+    ax7.plot(
+        peserta_peserta[6].progress, 
+        color='magenta', marker='o',mfc='pink', 
+        # xticks=range(0,len(peserta_peserta[6].progress)+1, 1),
+        xlabel='Minggu', ylabel=f'{peserta_peserta[6].name}')

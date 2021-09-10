@@ -38,34 +38,36 @@ if __name__ == '__main__':
         peserta_peserta[0].progress, 
         color='magenta', marker='o',mfc='pink', 
         # xticks=range(0,len(peserta_peserta[0].progress)+1, 1),
-        xlabel='Minggu', ylabel=f'{peserta_peserta[0].name}')
+        label=f'{peserta_peserta[0].name}')
     ax2.plot(
         peserta_peserta[1].progress, 
         color='magenta', marker='o',mfc='pink', 
         # xticks=range(0,len(peserta_peserta[1].progress)+1, 1),
-        xlabel='Minggu', ylabel=f'{peserta_peserta[1].name}')
+        label=f'{peserta_peserta[1].name}')
     ax3.plot(
         peserta_peserta[2].progress, 
         color='magenta', marker='o',mfc='pink', 
         # xticks=range(0,len(peserta_peserta[2].progress)+1, 1),
-        xlabel='Minggu', ylabel=f'{peserta_peserta[2].name}')
+        label=f'{peserta_peserta[2].name}')
     ax4.plot(
         peserta_peserta[3].progress, 
         color='magenta', marker='o',mfc='pink', 
         # xticks=range(0,len(peserta_peserta[3].progress)+1, 1),
-        xlabel='Minggu', ylabel=f'{peserta_peserta[3].name}')
+        label=f'{peserta_peserta[3].name}')
     ax5.plot(
         peserta_peserta[4].progress, 
         color='magenta', marker='o',mfc='pink', 
         # xticks=range(0,len(peserta_peserta[4].progress)+1, 1),
-        xlabel='Minggu', ylabel=f'{peserta_peserta[4].name}')
+        label=f'{peserta_peserta[4].name}')
     ax6.plot(
         peserta_peserta[5].progress, 
         color='magenta', marker='o',mfc='pink', 
         # xticks=range(0,len(peserta_peserta[5].progress)+1, 1),
-        xlabel='Minggu', ylabel=f'{peserta_peserta[5].name}')
+        label=f'{peserta_peserta[5].name}')
     ax7.plot(
         peserta_peserta[6].progress, 
         color='magenta', marker='o',mfc='pink', 
         # xticks=range(0,len(peserta_peserta[6].progress)+1, 1),
-        xlabel='Minggu', ylabel=f'{peserta_peserta[6].name}')
+        label=f'{peserta_peserta[6].name}')
+
+    plt.show()

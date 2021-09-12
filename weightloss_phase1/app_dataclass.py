@@ -32,41 +32,44 @@ if __name__ == '__main__':
         
     print(peserta_peserta)
 
-    fig, (ax1, ax2, ax3, ax4, ax5, ax6, ax7) = plt.subplots(len(peserta_peserta))
-    fig.suptitle('Perkembangan berat peserta-peserta')
-    ax1.plot(
-        peserta_peserta[0].progress, 
-        color='magenta', marker='o',mfc='pink',
-        label=f'{peserta_peserta[0].name}')
+    for p in peserta_peserta:
+        plt.plot(p.progress)
+    """ Multiple subplots"""
+    # fig, (ax1, ax2, ax3, ax4, ax5, ax6, ax7) = plt.subplots(len(peserta_peserta))
+    # fig.suptitle('Perkembangan berat peserta-peserta')
+    # ax1.plot(
+    #     peserta_peserta[0].progress, 
+    #     color='magenta', marker='o',mfc='pink',
+    #     label=f'{peserta_peserta[0].name}')
 
-    ax2.plot(
-        peserta_peserta[1].progress, 
-        color='magenta', marker='o',mfc='pink',
-        label=f'{peserta_peserta[1].name}')
+    # ax2.plot(
+    #     peserta_peserta[1].progress, 
+    #     color='magenta', marker='o',mfc='pink',
+    #     label=f'{peserta_peserta[1].name}')
 
-    ax3.plot(
-        peserta_peserta[2].progress, 
-        color='magenta', marker='o',mfc='pink',
-        label=f'{peserta_peserta[2].name}')
+    # ax3.plot(
+    #     peserta_peserta[2].progress, 
+    #     color='magenta', marker='o',mfc='pink',
+    #     label=f'{peserta_peserta[2].name}')
 
-    ax4.plot(
-        peserta_peserta[3].progress, 
-        color='magenta', marker='o',mfc='pink',
-        label=f'{peserta_peserta[3].name}')
+    # ax4.plot(
+    #     peserta_peserta[3].progress, 
+    #     color='magenta', marker='o',mfc='pink',
+    #     label=f'{peserta_peserta[3].name}')
 
-    ax5.plot(
-        peserta_peserta[4].progress, 
-        color='magenta', marker='o',mfc='pink',
-        label=f'{peserta_peserta[4].name}')
+    # ax5.plot(
+    #     peserta_peserta[4].progress, 
+    #     color='magenta', marker='o',mfc='pink',
+    #     label=f'{peserta_peserta[4].name}')
 
-    ax6.plot(
-        peserta_peserta[5].progress, 
-        color='magenta', marker='o',mfc='pink',
-        label=f'{peserta_peserta[5].name}')
+    # ax6.plot(
+    #     peserta_peserta[5].progress, 
+    #     color='magenta', marker='o',mfc='pink',
+    #     label=f'{peserta_peserta[5].name}')
 
-    ax7.plot(
-        peserta_peserta[6].progress, 
-        color='magenta', marker='o',mfc='pink',
-        label=f'{peserta_peserta[6].name}')
+    # ax7.plot(
+    #     peserta_peserta[6].progress, 
+    #     color='magenta', marker='o',mfc='pink',
+    #     label=f'{peserta_peserta[6].name}')
 
     plt.show()

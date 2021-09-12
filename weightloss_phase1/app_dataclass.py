@@ -34,6 +34,12 @@ if __name__ == '__main__':
 
     for p in peserta_peserta:
         plt.plot(p.progress)
+
+    plt.title('Perkembangan Berat Peserta')
+    plt.xlabel('Minggu')
+    plt.ylabel('Kilogram')
+    plt.legend([p.name for p in peserta_peserta])
+
     """ Multiple subplots"""
     # fig, (ax1, ax2, ax3, ax4, ax5, ax6, ax7) = plt.subplots(len(peserta_peserta))
     # fig.suptitle('Perkembangan berat peserta-peserta')

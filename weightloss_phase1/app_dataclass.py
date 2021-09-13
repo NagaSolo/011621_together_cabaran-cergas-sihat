@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import dataclasses
 from typing import List
 
 import pandas as pd
@@ -20,6 +21,23 @@ class Peserta:
         plt.title(f"Perkembangan Berat {self.name}") #set the title of the graph
         plt.show() #display the graph
 
+@dataclass
+class PesertaPeserta:
+
+    peserta_peserta : List[Peserta]
+    
+    def plot_all(self):
+        
+        for p in self.peserta_peserta:
+            plt.plot(p.progress)
+
+        plt.title('Perkembangan Berat Peserta')
+        plt.xlabel('Minggu')
+        plt.ylabel('Kilogram')
+        plt.legend([p.name for p in self.peserta_peserta])
+        plt.show()
+
+
 if __name__ == '__main__':
     peserta_peserta = []
 
@@ -30,15 +48,16 @@ if __name__ == '__main__':
         peserta_dan_progress = df[n]
         peserta_peserta.append(Peserta(n, peserta_dan_progress.values.tolist()))
         
-    print(peserta_peserta)
+    semua_peserta = PesertaPeserta(peserta_peserta=peserta_peserta)
+    semua_peserta.plot_all()
 
-    for p in peserta_peserta:
-        plt.plot(p.progress)
+    # for p in peserta_peserta:
+    #     plt.plot(p.progress)
 
-    plt.title('Perkembangan Berat Peserta')
-    plt.xlabel('Minggu')
-    plt.ylabel('Kilogram')
-    plt.legend([p.name for p in peserta_peserta])
+    # plt.title('Perkembangan Berat Peserta')
+    # plt.xlabel('Minggu')
+    # plt.ylabel('Kilogram')
+    # plt.legend([p.name for p in peserta_peserta])
 
     """ Multiple subplots"""
     # fig, (ax1, ax2, ax3, ax4, ax5, ax6, ax7) = plt.subplots(len(peserta_peserta))

@@ -13,6 +13,7 @@
     - chat
     - CRUD application
         - Feature to create, update, read, delete posts
+    - Progress application
 
 ### Django App
 - landing page
@@ -21,9 +22,9 @@
 
 ### Tech Stack
 - Microservices:
-    Container:
+    Container: -> `SOLVED` using cookiecutter
         - docker
-    Orchestration:
+    Orchestration: -> `SOLVED` using cookiecutter
         - docker-compose
         - kubernetes
     Communication:

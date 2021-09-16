@@ -24,12 +24,18 @@
 - Microservices:
     Container: -> `SOLVED` using cookiecutter
         - docker
+    
     Orchestration: -> `SOLVED` using cookiecutter
         - docker-compose
         - kubernetes
+
+    Security:
+        - django cookies for now
+
     Communication:
         - gRPC
         - REST API
+    
     API Gateway:
         - KONG
         - Ambassador

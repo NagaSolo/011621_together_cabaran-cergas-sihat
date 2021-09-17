@@ -39,3 +39,8 @@
     API Gateway:
         - KONG
         - Ambassador
+
+### TO DO
+    - progress app (django)
+    - user input data weakly (django)
+    - user profile

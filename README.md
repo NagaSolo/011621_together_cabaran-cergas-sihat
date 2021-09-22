@@ -34,6 +34,7 @@
 
     Communication:
         - gRPC
+        - Graphql
         - REST API
     
     API Gateway:

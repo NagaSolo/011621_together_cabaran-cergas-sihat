@@ -4,11 +4,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from PIL import Image
-from django.db.models.fields.related import OneToOneField
 
-class ProfileImage(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     picture = models.ImageField(default='default.jpg', upload_to='images/profile_pics')
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.user.username} Profile'

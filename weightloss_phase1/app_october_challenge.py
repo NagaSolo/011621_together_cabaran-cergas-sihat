@@ -41,7 +41,7 @@ class PesertaPeserta:
 if __name__ == '__main__':
     peserta_peserta = []
 
-    df = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
+    df = pd.read_csv('datasets/october_fat_rain_down_challenge.csv', sep=',', thousands=' ')
     
     # print(df['Adz'].values.tolist())
     for n in df.columns[1:]:

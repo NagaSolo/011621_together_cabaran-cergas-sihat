@@ -12,13 +12,24 @@ class Peserta:
     progress : List
 
     def plot(self):
-        plt.plot(self.progress, color='magenta', marker='o',mfc='pink') #plot the data
-        plt.xticks(range(0,len(self.progress)+1, 1)) #set the tick frequency on x-axis
+        
+        # plot the data
+        plt.plot(self.progress, color='magenta', marker='o',mfc='pink')
+        
+        # set the tick frequency on x-axis
+        plt.xticks(range(0,len(self.progress)+1, 1))
 
-        plt.ylabel('KG') #set the label for y axis
-        plt.xlabel('Minggu') #set the label for x-axis
-        plt.title(f"Perkembangan Berat {self.name}") #set the title of the graph
-        plt.show() #display the graph
+        # set the label for y axis
+        plt.ylabel('KG')
+        
+        # set the label for x-axis
+        plt.xlabel('Minggu')
+        
+        # set the title of the graph
+        plt.title(f"Perkembangan Berat {self.name}") 
+        
+        # display the graph
+        plt.show()
 
 @dataclass
 class PesertaPeserta:
@@ -28,7 +39,7 @@ class PesertaPeserta:
     def plot_all(self):
         
         for p in self.peserta_peserta:
-            plt.plot(p.progress)
+            plt.plot(p.progress, color='magenta', marker='o',mfc='pink')
 
         plt.title('Perkembangan Berat Peserta')
         plt.xlabel('Minggu')

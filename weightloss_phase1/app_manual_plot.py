@@ -12,14 +12,17 @@ class DataSet:
     def __init__(self) -> DataFrame:
         self.df_with_nan = pd.read_csv('datasets/progress_phase1.csv', sep=',', thousands=' ')
         self.df_no_nan = pd.read_csv('datasets/progress_phase1_no_NaN.csv', sep=',', thousands=' ')
+        self.df_octo = pd.read_csv('datasets/october_fat_rain_down_challenge_row.csv', sep=',', thousands=' ')
 
     def option(self, choice):
         if choice == 0:
             return self.df_with_nan
         elif choice == 1:
             return self.df_no_nan
+        elif choice == 2:
+            return self.df_octo
         else:
-            return f'{choice} is not a viable option, select 0 or 1'
+            return f'{choice} is not a viable option, select 0 or 1 or 2'
 
 class IndividualProgressChart:
     """ Plot individual data """
@@ -34,7 +37,7 @@ class IndividualProgressChart:
             col_minggu = self.df['Minggu']
             new_df = pd.DataFrame(list(zip(col_minggu, col_individu)), columns=['Minggu', self.name])
             new_df.plot(x ='Minggu', y=self.name, kind = 'line')
-            plt.savefig('output/' + self.name + '.png')
+            plt.savefig('output_october/' + self.name + '.png')
             return f'Graph for {self.name} done'
         else:
             return f'No {self.name}'
@@ -67,10 +70,16 @@ if __name__ == '__main__':
 
     w_NaN_dataset = DataSet().option(0)
     wo_NaN_dataset = DataSet().option(1)
+    octo_dataset = DataSet().option(2)
 
-    """class method datasource, plot all individual graph """
+    """class method datasource, plot all individual graph, dataset without NaN """
 
-    for person in ['Abe Kamil', 'Abe Isey', 'Kak Dayah', 'Kak Teh', 'Adz', 'Auni', 'Anis']:
-        print(IndividualProgressChart(person, wo_NaN_dataset).output_graph())
+    # for person in ['Abe Kamil', 'Abe Isey', 'Kak Dayah', 'Kak Teh', 'Adz', 'Auni', 'Anis']:
+    #     print(IndividualProgressChart(person, wo_NaN_dataset).output_graph())
 
-    print(AllProgressChart(w_NaN_dataset).output_together_graph())
+    # print(AllProgressChart(w_NaN_dataset).output_together_graph())
+
+    for person in ['Kak Dayah', 'Abe Isey', 'Kak Teh', 'Auni', 'Anis']:
+        print(IndividualProgressChart(person, octo_dataset).output_graph())
+
+    print(AllProgressChart(octo_dataset).output_together_graph())
